@@ -1,0 +1,41 @@
+---
+title: "Getting Started with Granular Accounting Calculations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with Granular Accounting Calculations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse=TRUE,comment="#>")
+```
+
+The package exposes small deterministic formulas as well as a controlled
+complete workflow. Rates are decimals, time is measured in years and money in
+one call uses one currency.
+
+```{r}
+library(financialAccountingEngine)
+discount_factor(0.05,1)
+effective_interest_rate(1000,list(c(1,1100)))
+component_ecl(0.02,100000,0.40,0.05,1)
+```
+
+Policy and model inputs remain explicit. The packaged policy has a fixed ID and
+date rather than a floating "latest" value.
+
+```{r}
+policy <- get_policy()
+policy[c("policy_id","reporting_date","past_due_sicr_days")]
+get_formula("F-ECL-001")
+```
+
+The synthetic small profile runs entirely offline. `APPROVED_REFERENCE` means
+the package controls passed; it is not an institutional approval.
+
+```{r}
+result <- run_dataset(load_reference_data("SMALL_SA_RETAIL_FIA"))
+stopifnot(result$status == "APPROVED_REFERENCE")
+get_metrics(result)[c("opening_gross_exposure","closing_allowance")]
+```

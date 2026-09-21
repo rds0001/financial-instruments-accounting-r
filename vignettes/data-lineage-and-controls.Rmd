@@ -1,0 +1,44 @@
+---
+title: "Reference Data, Snapshots, Lineage and Controls"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reference Data, Snapshots, Lineage and Controls}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse=TRUE,comment="#>")
+library(financialAccountingEngine)
+```
+
+The package includes two synthetic profiles with all 19 canonical tables. The
+bitemporal selector requires exactly one active official row for every business
+key at both cut-offs.
+
+```{r}
+data <- load_reference_data("SMALL_SA_RETAIL_FIA")
+selected <- select_snapshot(list(instruments=data$instruments),"2026-12-31",
+                            "2026-09-02T12:00:00+02:00")
+stopifnot(length(selected$instruments)==5)
+```
+
+The complete run exposes copies of results and lineage. Mutating an accessor's
+return value does not alter the result object.
+
+```{r}
+result <- run_dataset(data)
+controls <- get_controls(result)
+stopifnot(length(controls)==28,
+          all(vapply(controls,function(x)x$status=="PASS",logical(1))))
+lineage <- get_lineage(result)
+lineage[c("contract_version","policy_id","rule_set_id","run_id")]
+```
+
+The source metadata contains links and hashes but does not redistribute
+standard texts or download anything when the package is loaded.
+
+```{r}
+sources <- get_sources()
+stopifnot(all(!vapply(sources,function(x)x$redistributed,logical(1))))
+```

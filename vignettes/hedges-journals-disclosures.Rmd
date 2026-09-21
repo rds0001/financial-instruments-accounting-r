@@ -1,0 +1,41 @@
+---
+title: "Hedges, Journals, Disclosures and Reconciliation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Hedges, Journals, Disclosures and Reconciliation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse=TRUE,comment="#>")
+library(financialAccountingEngine)
+```
+
+Hedge functions require designation, eligibility, an economic relationship and
+explicit lifecycle facts. They calculate reference entries but never post them.
+
+```{r}
+hedge <- list(relationship_id="H",hedge_type="CASH_FLOW",hedging_change=120,
+  hedged_change=-100,hedge_ratio=1,target_hedge_ratio=1,
+  hedging_instrument_eligible=TRUE,hedged_item_eligible=TRUE,
+  risk_component_eligible=TRUE,designation_documented=TRUE,
+  risk_management_objective="Manage cash-flow risk",designated=TRUE,
+  economic_relationship=TRUE,credit_risk_dominates=FALSE,
+  forecast_transaction_expected=TRUE)
+measured <- measure_hedge(hedge)
+measured[c("status","oci_effective","ineffectiveness_pnl")]
+```
+
+Reference journals balance by batch. Account mapping and posting approval are
+institutional responsibilities.
+
+```{r}
+inst <- list(list(instrument_id="x",gross_amount=100,instrument_type="LOAN"))
+ecl <- list(list(instrument_id="x",stage="STAGE_1",final_ecl=20))
+journals <- build_journals(ecl,c(x=5),c(x="AMORTISED_COST"),inst)
+stopifnot(abs(sum(vapply(journals,function(x)x$debit-x$credit,numeric(1))))<1e-12)
+```
+
+Disclosure aggregation computes coverage from aggregate amounts and keeps the
+regulatory bridge outside the accounting calculation.

@@ -1,0 +1,45 @@
+---
+title: "Staging, Scenario ECL and POCI"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Staging, Scenario ECL and POCI}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse=TRUE,comment="#>")
+library(financialAccountingEngine)
+```
+
+Staging consumes documented facts and policy thresholds. Credit impairment has
+priority over SICR, and days-past-due presumptions remain subject to governed
+rebuttal rather than being hard-coded as an automatic conclusion.
+
+```{r}
+facts <- list(instrument_id="loan-1",impairment_scope="GENERAL_ECL",
+              days_past_due=35,rating_orig=3,rating_current=5)
+stage <- assess_stage(facts)
+stage[c("stage","stage_reason")]
+```
+
+Scenario ECL calculates each scenario before probability weighting. Stage 1
+uses defaults within one year; lifetime stages use all supplied years.
+
+```{r}
+instrument <- list(instrument_id="loan-1",impairment_scope="GENERAL_ECL",
+                   ecl_method="COMPONENT_PD_LGD_EAD",eir=.05,overlay=0)
+pd <- list(list(scenario_id="base",year=1,marginal_pd=.02))
+lgd <- list(list(scenario_id="base",year=1,lgd=.40))
+ead <- list(list(scenario_id="base",year=1,ead=100000))
+loss <- scenario_ecl(instrument,"STAGE_1",pd,lgd,ead,c(base=1))
+stopifnot(abs(loss$summary$final_ecl-761.904761904762)<1e-8)
+loss$details
+```
+
+POCI allowance movements remain signed so favourable changes are not converted
+into ordinary positive loss allowances.
+
+```{r}
+poci_allowance_change(20,30)
+```

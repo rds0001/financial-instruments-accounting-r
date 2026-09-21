@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "as_of_date": "2026-12-31",
+  "knowledge_time": "2026-09-02T12:00:00+02:00",
+  "distribution_policy": "EXTERNAL_REFERENCES_ONLY",
+  "notice": "No third-party standards, legislation, guidance or web content is redistributed with this repository. Hashes identify the copies reviewed during development; obtain current materials from the official publishers and comply with their terms.",
+  "sources": [
+    {
+      "source_id": "EU-2023-1803",
+      "title": "Commission Regulation (EU) 2023/1803 adopting international accounting standards",
+      "issuer": "European Commission",
+      "source_type": "Regulation",
+      "legal_status": "BINDING_EU_ENDORSED",
+      "official_url": "https://eur-lex.europa.eu/eli/reg/2023/1803/oj",
+      "archival_sha256": "e4fde71d4db44ef7c6f74055a564c8cb071340442b63185ff1700c86a64579e5",
+      "redistributed": false,
+      "topics": ["IFRS9", "IFRS7", "IAS32", "IFRS13", "interfaces"]
+    },
+    {
+      "source_id": "EU-2025-1047",
+      "title": "Amendments to Classification and Measurement of Financial Instruments",
+      "issuer": "European Commission",
+      "source_type": "Regulation",
+      "legal_status": "BINDING_EU_ENDORSED",
+      "official_url": "https://eur-lex.europa.eu/eli/reg/2025/1047/oj/eng",
+      "archival_sha256": "8adc03b4e55f96cabd40e3c1a5793eac20beb8aa7666c73e18b68761242c340d",
+      "redistributed": false,
+      "topics": ["classification", "SPPI", "electronic_payment", "IFRS7"]
+    },
+    {
+      "source_id": "EU-2025-1266",
+      "title": "Contracts Referencing Nature-dependent Electricity",
+      "issuer": "European Commission",
+      "source_type": "Regulation",
+      "legal_status": "BINDING_EU_ENDORSED",
+      "official_url": "https://eur-lex.europa.eu/eli/reg/2025/1266/oj/eng",
+      "archival_sha256": "9bee5220651e07db5fe37d5b482887847f7c4af345e25feda12f3f06e49ff318",
+      "redistributed": false,
+      "topics": ["own_use", "nature_dependent_electricity", "hedge_accounting", "IFRS7"]
+    },
+    {
+      "source_id": "EFRAG-ESR-2026-07-23",
+      "title": "EU Endorsement Status Report",
+      "issuer": "EFRAG",
+      "source_type": "Endorsement status",
+      "legal_status": "GUIDANCE",
+      "official_url": "https://www.efrag.org/en/financial-reporting/endorsement-status",
+      "archival_sha256": "314e4f56301dcf43e7aa203ac618378bfa2e94fe5a2899ba44412cffc892274f",
+      "redistributed": false,
+      "topics": ["endorsement", "effective_dates"]
+    },
+    {
+      "source_id": "IASB-CRNE-2024",
+      "title": "Contracts Referencing Nature-dependent Electricity",
+      "issuer": "International Accounting Standards Board",
+      "source_type": "Amendment",
+      "legal_status": "IASB_ISSUED",
+      "official_url": "https://www.ifrs.org/content/dam/ifrs/publications/amendments/english/2024/iasb-2024-3-crne-ifrs7-ifrs9.pdf",
+      "archival_sha256": "fcf073beb3011181e455c5c751744438d29e77b645945bb5a0845e89912605a0",
+      "redistributed": false,
+      "topics": ["own_use", "hedge_accounting", "disclosures"]
+    },
+    {
+      "source_id": "IASB-2026-CHANGES",
+      "title": "Changes in this edition—2026 Required IFRS Standards",
+      "issuer": "IFRS Foundation",
+      "source_type": "Edition information",
+      "legal_status": "INFORMATION",
+      "official_url": "https://www.ifrs.org/content/dam/ifrs/shop/bb2026-changesinthisedition.pdf",
+      "archival_sha256": "9149653717dd28ee262f519e092a008f5a895343459a56cff5717889b20bae03",
+      "redistributed": false,
+      "topics": ["effective_dates", "IFRS9", "IFRS7"]
+    },
+    {
+      "source_id": "IFRIC-V14-2026",
+      "title": "Compilation of Agenda Decisions—Volume 14",
+      "issuer": "IFRS Interpretations Committee",
+      "source_type": "Agenda decision index",
+      "legal_status": "AGENDA_DECISION",
+      "official_url": "https://www.ifrs.org/news-and-events/news/2026/05/compilation-of-agenda-decisions-volume-14-published/",
+      "archival_sha256": "80c4cd3517644c95e7929ccf596427b2e252dfb2624febc93fe632b9731a47d1",
+      "redistributed": false,
+      "topics": ["prepayment", "transaction_costs", "physical_settlement"]
+    },
+    {
+      "source_id": "EBA-GL-2017-06",
+      "title": "Guidelines on credit institutions' credit risk management practices and accounting for expected credit losses",
+      "issuer": "European Banking Authority",
+      "source_type": "Guideline",
+      "legal_status": "GUIDANCE",
+      "official_url": "https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-guidelines-credit-institutions-credit",
+      "archival_sha256": "288cf3948e3a8de6f690255582787d55e91f231a130c25110061d5919da2f1c8",
+      "redistributed": false,
+      "topics": ["ECL", "governance", "credit_risk_management"]
+    },
+    {
+      "source_id": "BCBS-D350",
+      "title": "Guidance on credit risk and accounting for expected credit losses",
+      "issuer": "Basel Committee on Banking Supervision",
+      "source_type": "Guideline",
+      "legal_status": "GUIDANCE",
+      "official_url": "https://www.bis.org/bcbs/publ/d350.htm",
+      "archival_sha256": "ce33615b927324d753eb54289de174d2ed47899f5c79a2929ed3f8acb790c862",
+      "redistributed": false,
+      "topics": ["ECL", "governance", "regulatory_bridge"]
+    },
+    {
+      "source_id": "ECB-OVERLAYS-2024",
+      "title": "IFRS 9 overlays and model improvements for novel risks",
+      "issuer": "European Central Bank Banking Supervision",
+      "source_type": "Supervisory publication",
+      "legal_status": "GUIDANCE",
+      "official_url": "https://www.bankingsupervision.europa.eu/ecb/pub/pdf/ssm.IFRS9novelrisks_202407~5e0eb30b5c.en.pdf",
+      "archival_sha256": "8bb32c610db51c343f2306b2b117ade896cee77112e75240fbc1283dc06befb9",
+      "redistributed": false,
+      "topics": ["overlays", "novel_risks", "staging", "governance"]
+    },
+    {
+      "source_id": "ESMA-ECEP-2025",
+      "title": "European common enforcement priorities for 2025 corporate reporting",
+      "issuer": "European Securities and Markets Authority",
+      "source_type": "Enforcement priorities",
+      "legal_status": "GUIDANCE",
+      "official_url": "https://www.esma.europa.eu/press-news/esma-news/esma-announces-2025-european-common-enforcement-priorities-and-results-fact",
+      "archival_sha256": "28efdfc6863514e77176b587b37f18d29b59cbd898d3ddfe82c77139e55c4697",
+      "redistributed": false,
+      "topics": ["2026_amendments", "disclosures", "enforcement"]
+    },
+    {
+      "source_id": "IASB-ACM-2026",
+      "title": "Amortised Cost Measurement project",
+      "issuer": "International Accounting Standards Board",
+      "source_type": "Project",
+      "legal_status": "DRAFT_PROJECT",
+      "official_url": "https://www.ifrs.org/projects/work-plan/amortised-cost-measurement/",
+      "archival_sha256": "3fed7a02adc8e2ecb87f6a737a9e6be08f930b758f8ee8e8924da5e6026286dc",
+      "redistributed": false,
+      "topics": ["EIR", "modification", "derecognition", "writeoff"]
+    }
+  ]
+}

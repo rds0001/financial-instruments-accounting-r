@@ -1,0 +1,32 @@
+name: Bug report
+description: Report reproducible incorrect behavior
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Include a minimal synthetic example and the exact error or result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior and basis
+      description: State the independent calculation or accounting basis.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Package, R, and operating-system versions
+    validations:
+      required: true
+  - type: checkboxes
+    id: data
+    attributes:
+      label: Data confirmation
+      options:
+        - label: The report contains no confidential or personal data.
+          required: true

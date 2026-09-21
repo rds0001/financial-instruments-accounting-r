@@ -1,0 +1,17 @@
+args <- commandArgs(trailingOnly=TRUE)
+package <- if(length(args)>=1L) args[[1L]] else "financialAccountingEngine"
+lib <- if(length(args)>=2L) normalizePath(args[[2L]],winslash="/",mustWork=TRUE) else .libPaths()
+ns <- loadNamespace(package,lib.loc=lib)
+stopifnot(length(getNamespaceExports(package))==80L)
+df <- get("discount_factor",envir=ns)(0.05,1)
+stopifnot(abs(df-1/1.05)<1e-12)
+for(topic in c("discount_factor","run_dataset","get_schema"))
+  stopifnot(length(do.call(utils::help,list(topic=topic,package=package,lib.loc=lib)))>0L)
+overview <- do.call(utils::help,list(topic=package,package=package,lib.loc=lib))
+stopifnot(length(overview)>0L)
+search <- utils::help.search(package,package=package,lib.loc=lib)
+stopifnot(nrow(search$matches)>0L,
+          any(search$matches[,"Topic"] %in% c(package,paste0(package,"-package"))))
+notice <- system.file("NOTICE",package=package,lib.loc=lib)
+stopifnot(file.exists(notice),file.info(notice)$size>0)
+cat("Installed package and help smoke test: PASS\n")

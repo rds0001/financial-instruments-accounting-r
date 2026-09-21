@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If this software supports your work, cite the software release."
+title: "financial-accounting-engine for R"
+type: software
+version: 0.1.0
+date-released: 2026-09-21
+authors:
+  - name: "RiskDataScience GmbH"
+repository-code: "https://github.com/rds0001/financial-instruments-accounting-r"
+license: Apache-2.0

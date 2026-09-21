@@ -1,0 +1,9 @@
+financial-accounting-engine
+Copyright 2026 RiskDataScience GmbH
+
+Licensed under the Apache License, Version 2.0. The complete license text is
+available in the source repository as LICENSE.md.
+
+The bundled reference profiles are synthetic and contain no real customer,
+bank, or personal data. External accounting standards and legal texts are not
+redistributed with this package.

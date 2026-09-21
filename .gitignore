@@ -1,0 +1,8 @@
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.work/
+*.Rcheck/
+*.tar.gz
+release-evidence/
