@@ -70,6 +70,9 @@ main <- function() {
   }
   allow_offline <- identical(tolower(Sys.getenv("FAE_ALLOW_OFFLINE_CHECK_NOTES")),
                              "true")
+  allow_transient_urls <- identical(
+    tolower(Sys.getenv("FAE_ALLOW_TRANSIENT_URL_NOTES")), "true"
+  )
   is_offline_infrastructure <- function(note) {
     time_only <- grepl("unable to verify current time", note, fixed = TRUE)
     dns_only <- grepl("Could not resolve host|Couldn't resolve host name", note) &&
@@ -77,8 +80,21 @@ main <- function() {
       !grepl("libcurl error code (?!6)", note, perl = TRUE)
     time_only || dns_only
   }
+  is_known_transient_url_failure <- function(note) {
+    lines <- strsplit(note, "\n", fixed = TRUE)[[1L]]
+    url_lines <- grep("^[[:space:]]*URL:[[:space:]]*", lines, value = TRUE)
+    urls <- sub("^[[:space:]]*URL:[[:space:]]*", "", url_lines)
+    allowed_urls <- c(
+      "https://riskdatascience.net/impressum/",
+      "https://riskdatascience.net/datenschutzerklaerung/"
+    )
+    length(urls) > 0L && all(urls %in% allowed_urls) &&
+      grepl("Status: 50[0-4]", note)
+  }
   accepted <- vapply(note_text, is_new_submission, logical(1)) |
-    (allow_offline & vapply(note_text, is_offline_infrastructure, logical(1)))
+    (allow_offline & vapply(note_text, is_offline_infrastructure, logical(1))) |
+    (allow_transient_urls &
+       vapply(note_text, is_known_transient_url_failure, logical(1)))
   if (any(!accepted)) {
     stop("Unapproved R CMD check NOTE(s):\n", paste(note_text[!accepted], collapse = "\n---\n"))
   }

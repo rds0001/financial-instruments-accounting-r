@@ -38,7 +38,11 @@ jobs:
           needs: check
       - uses: r-lib/actions/check-r-package@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
-          args: 'c("--as-cran")'
+          # The release-candidate job below performs the full manual check
+          # once with a pinned TeX toolchain. The OS/R matrix focuses on the
+          # package, vignettes, examples and tests without installing TeX five
+          # separate times.
+          args: 'c("--as-cran", "--no-manual")'
           error-on: '"warning"'
 
   release-candidate:
@@ -46,6 +50,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      FAE_ALLOW_TRANSIENT_URL_NOTES: true
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
@@ -53,9 +58,16 @@ jobs:
           r-version: release
           use-public-rspm: true
       - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+      - uses: r-lib/actions/setup-tinytex@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+      - name: Install HTML Tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes tidy
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
-          extra-packages: any::rcmdcheck, any::roxygen2, any::pkgbuild, any::pkgload, any::digest
+          # Generated Rd files are intentionally reproducible with the
+          # version recorded in DESCRIPTION.
+          extra-packages: any::rcmdcheck, cran::roxygen2@7.3.1, any::pkgbuild, any::pkgload, any::digest
           needs: check
       - name: Regenerate API documentation
         shell: Rscript {0}
